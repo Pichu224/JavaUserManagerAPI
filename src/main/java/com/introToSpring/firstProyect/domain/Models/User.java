@@ -1,13 +1,9 @@
 package com.introToSpring.firstProyect.domain.Models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -19,7 +15,7 @@ public class User {
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private String username;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -29,11 +25,4 @@ public class User {
 
     @Column(nullable = false)
     private String role;
-
-    public User(String name, String password, String email) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.role = "USER";
-    }
 }

@@ -1,5 +1,6 @@
 package com.introToSpring.firstProyect.domain.Services.GetAllUsers;
 
+import com.introToSpring.firstProyect.Infrastructure.Mapper.UserMapper;
 import com.introToSpring.firstProyect.common.mediator.RequestHandler;
 import com.introToSpring.firstProyect.domain.Models.User;
 import com.introToSpring.firstProyect.domain.Repositories.UserRepository;
@@ -15,10 +16,12 @@ import java.util.List;
 public class GetAllUsersHandler implements RequestHandler<GetAllUsersRequest, List<GetUserResponse>> {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     @Override
     public List<GetUserResponse> handle(GetAllUsersRequest request) {
-        return userRepository.findAll().stream().map(GetUserResponse::new).toList();
+        return userRepository.findAll().stream()
+                .map(u -> new GetUserResponse(userMapper.toResponse(u))).toList();
     }
 
     @Override

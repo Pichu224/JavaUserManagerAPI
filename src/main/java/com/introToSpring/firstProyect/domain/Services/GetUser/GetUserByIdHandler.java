@@ -1,5 +1,6 @@
 package com.introToSpring.firstProyect.domain.Services.GetUser;
 
+import com.introToSpring.firstProyect.Infrastructure.Mapper.UserMapper;
 import com.introToSpring.firstProyect.common.mediator.RequestHandler;
 import com.introToSpring.firstProyect.domain.Models.User;
 import com.introToSpring.firstProyect.domain.Repositories.UserRepository;
@@ -13,13 +14,14 @@ import org.springframework.stereotype.Service;
 public class GetUserByIdHandler implements RequestHandler<GetUserByIdRequest, GetUserByIdResponse> {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     @Override
     public GetUserByIdResponse handle(GetUserByIdRequest request) {
         User user = userRepository.findById(request.getId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        return new GetUserByIdResponse(user);
+        return new GetUserByIdResponse(userMapper.toResponse(user));
     }
 
     @Override

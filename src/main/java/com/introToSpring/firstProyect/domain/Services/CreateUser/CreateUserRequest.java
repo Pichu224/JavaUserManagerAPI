@@ -11,12 +11,12 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class CreateUserRequest implements Request<CreateUserResponse> {
 
-    String name;
+    String username;
     String email;
     String password;
 
-    public CreateUserRequest(String name, String email, String password) {
-        this.name = name;
+    public CreateUserRequest(String username, String email, String password) {
+        this.username = username;
         this.email = email;
         this.password = password;
     }
