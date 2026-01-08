@@ -1,5 +1,6 @@
 package com.introToSpring.firstProyect.domain.Services.UpdateUser;
 
+import com.introToSpring.firstProyect.Exceptions.BussinessExceptions.UserNotFoundException;
 import com.introToSpring.firstProyect.Infrastructure.Mapper.UserMapper;
 import com.introToSpring.firstProyect.common.mediator.RequestHandler;
 import com.introToSpring.firstProyect.domain.Models.User;
@@ -20,7 +21,7 @@ public class UpdateUserHandler implements RequestHandler<UpdateUserRequest, Upda
     public UpdateUserResponse handle(UpdateUserRequest request) {
 
         User user = userRepository.findById(request.getId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException(request.getId()));
 
         user.setUsername(request.getName());
         user.setEmail(request.getEmail());

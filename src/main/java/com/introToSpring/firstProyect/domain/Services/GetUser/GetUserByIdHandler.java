@@ -1,5 +1,6 @@
 package com.introToSpring.firstProyect.domain.Services.GetUser;
 
+import com.introToSpring.firstProyect.Exceptions.BussinessExceptions.UserNotFoundException;
 import com.introToSpring.firstProyect.Infrastructure.Mapper.UserMapper;
 import com.introToSpring.firstProyect.common.mediator.RequestHandler;
 import com.introToSpring.firstProyect.domain.Models.User;
@@ -19,7 +20,7 @@ public class GetUserByIdHandler implements RequestHandler<GetUserByIdRequest, Ge
     @Override
     public GetUserByIdResponse handle(GetUserByIdRequest request) {
         User user = userRepository.findById(request.getId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException(request.getId()));
 
         return new GetUserByIdResponse(userMapper.toResponse(user));
     }

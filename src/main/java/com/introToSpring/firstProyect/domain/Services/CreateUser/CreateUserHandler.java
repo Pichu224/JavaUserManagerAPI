@@ -1,5 +1,6 @@
 package com.introToSpring.firstProyect.domain.Services.CreateUser;
 
+import com.introToSpring.firstProyect.Exceptions.BussinessExceptions.EmailAlreadyExistsException;
 import com.introToSpring.firstProyect.Infrastructure.Mapper.UserMapper;
 import com.introToSpring.firstProyect.common.mediator.RequestHandler;
 import com.introToSpring.firstProyect.domain.Models.User;
@@ -19,8 +20,9 @@ public class CreateUserHandler implements RequestHandler<CreateUserRequest, Crea
 
     @Override
     public CreateUserResponse handle(CreateUserRequest request) {
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already exists");
+        String email = request.getEmail();
+        if (userRepository.existsByEmail(email)) {
+            throw new EmailAlreadyExistsException(email);
         }
 
         User user = new User();
