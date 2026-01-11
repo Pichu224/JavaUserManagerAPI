@@ -56,7 +56,7 @@ Esta separación permite un código **mantenible, testeable y escalable**.
 
 ### 1️⃣ Clonar el repositorio
 
-```
+```bash
 git clone https://github.com/Pichu224/JavaUserManagerAPI.git
 cd JavaUserManagerAPI
 
