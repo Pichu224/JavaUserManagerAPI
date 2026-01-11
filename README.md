@@ -60,8 +60,6 @@ Esta separación permite un código **mantenible, testeable y escalable**.
 git clone https://github.com/Pichu224/JavaUserManagerAPI.git
 ```
 
----
-
 cd JavaUserManagerAPI
 
 2️⃣ Levantar la base de datos con Docker
@@ -88,6 +86,7 @@ Puerto: 5432
 La API quedará disponible en:
 
 http://localhost:8080
+
 🛠 Base de datos y migraciones
 Se utiliza PostgreSQL como base de datos principal.
 
@@ -130,20 +129,21 @@ User: postgres
 Password: postgres
 
 📌 Estado del proyecto
-✔ CRUD completo y funcional
-✔ PostgreSQL con Docker
-✔ Migraciones con Flyway
-✔ Arquitectura clara y desacoplada
-✔ DTOs y mappers con MapStruct
-✔ Manejo de errores básico
+
+- [x]  CRUD completo y funcional
+- [x]  PostgreSQL con Docker
+- [x]  Migraciones con Flyway
+- [x]  Arquitectura clara y desacoplada
+- [x]  DTOs y mappers con MapStruct
+- [x]  Manejo de errores básico
 
 🔄 Pendiente:
 
-Tests unitarios y de integración
+- [ ] Tests unitarios y de integración
 
-Paginación y filtros
+- [ ] Paginación y filtros
 
-Spring Security + JWT
+- [ ] Spring Security + JWT
 
 📎 Notas
 Este proyecto está pensado como base profesional para entrevistas técnicas y crecimiento futuro, priorizando buenas prácticas desde el inicio.
