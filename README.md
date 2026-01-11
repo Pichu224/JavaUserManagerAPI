@@ -128,21 +128,18 @@ User: postgres
 
 Password: postgres
 
-📌 Estado del proyecto
+## 📌 Estado del proyecto
 
-- [x]  CRUD completo y funcional
-- [x]  PostgreSQL con Docker
-- [x]  Migraciones con Flyway
-- [x]  Arquitectura clara y desacoplada
-- [x]  DTOs y mappers con MapStruct
-- [x]  Manejo de errores básico
+- [x] CRUD funcional
+- [x] Arquitectura base definida
+- [x] Uso de DTOs y MapStruct
+- [x] PostgreSQL + Flyway
 
-🔄 Pendiente:
+### 🔄 Próximos pasos
 
-- [ ] Tests unitarios y de integración
-
-- [ ] Paginación y filtros
-
+- [ ] Tests unitarios
+- [ ] Tests de integración
+- [ ] Manejo de errores global (ControllerAdvice)
 - [ ] Spring Security + JWT
 
 📎 Notas
