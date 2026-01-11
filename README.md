@@ -1,8 +1,6 @@
 # Spring Boot Users API
 
-API REST desarrollada con **Spring Boot** que implementa un CRUD de usuarios, siguiendo buenas prácticas de arquitectura y separación de responsabilidades.
-
-Este proyecto forma parte de mi proceso de aprendizaje en backend con Java y Spring.
+API REST desarrollada con **Spring Boot** que implementa un CRUD de usuarios, siguiendo buenas prácticas de arquitectura, separación de responsabilidades y diseño orientado a dominio.
 
 ---
 
@@ -11,23 +9,36 @@ Este proyecto forma parte de mi proceso de aprendizaje en backend con Java y Spr
 - Java 21
 - Spring Boot
 - Spring Web
-- Spring Data JPA
-- H2 Database (en memoria)
+- Spring Data JPA (Hibernate)
+- PostgreSQL
+- Flyway (Database Migrations)
+- Docker
 - MapStruct
 - Lombok
 - Maven
 
 ---
 
-## 📂 Estructura del proyecto
+## 📂 Arquitectura del proyecto
 
-El proyecto está organizado en capas, separando responsabilidades:
+El proyecto sigue una **arquitectura en capas**, inspirada en Clean Architecture / Hexagonal:
 
-- **Controller**: manejo de requests HTTP
-- **Application / Handlers**: lógica de casos de uso
-- **Domain**: entidades de dominio
-- **Repository**: acceso a datos mediante JPA
-- **DTOs & Mappers**: contratos HTTP y mapeo entre capas
+- **Controller**  
+  Manejo de requests HTTP y validaciones básicas.
+
+- **Application / Services (Handlers)**  
+  Implementación de los casos de uso (Create, Update, Get, Delete).
+
+- **Domain**  
+  Entidades de dominio y lógica central del negocio.
+
+- **Repository**  
+  Acceso a datos mediante JPA.
+
+- **DTOs & Mappers**  
+  Contratos de entrada/salida y mapeo entre capas usando MapStruct.
+
+Esta separación permite un código **mantenible, testeable y escalable**.
 
 ---
 
@@ -35,7 +46,7 @@ El proyecto está organizado en capas, separando responsabilidades:
 
 - Crear usuario
 - Obtener usuario por ID
-- Obtener lista de usuarios
+- Obtener todos los usuarios
 - Actualizar usuario
 - Eliminar usuario
 
@@ -43,52 +54,92 @@ El proyecto está organizado en capas, separando responsabilidades:
 
 ## ▶️ Cómo ejecutar el proyecto
 
-Clonar el repositorio:
+### 1️⃣ Clonar el repositorio
 
-```bash
+```
 git clone https://github.com/Pichu224/JavaUserManagerAPI.git
-```
-
-Entrar al proyecto:
-
-```bash
 cd JavaUserManagerAPI
-```
 
-Ejecutar la aplicación:
+2️⃣ Levantar la base de datos con Docker
+Asegurate de tener Docker Desktop corriendo.
 
-```bash
+docker run --name postgres-users -e POSTGRES_DB=users_db -e POSTGRES_USER=postgres 
+-e POSTGRES_PASSWORD=postgres -p 5432:5432 -v postgres_users_data:/var/lib/postgresql/data -d postgres:17-alpine
+
+Esto crea:
+
+Base de datos: users_db
+
+Usuario: postgres
+
+Password: postgres
+
+Puerto: 5432
+
+3️⃣ Ejecutar la aplicación
+
 ./mvnw spring-boot:run
-```
+(En Windows también se puede usar mvnw.cmd)
 
-(En Windows también se puede usar `mvnw.cmd`)
+La API quedará disponible en:
 
-La API queda disponible en:
-
-```
 http://localhost:8080
-```
+🛠 Base de datos y migraciones
+Se utiliza PostgreSQL como base de datos principal.
 
----
+Las tablas se crean automáticamente mediante Flyway.
 
-## 🛠 Base de datos
+Los scripts de migración se encuentran en:
 
-Se utiliza **H2 en memoria**, por lo que los datos se pierden al reiniciar la aplicación.
+src/main/resources/db/migration
 
-La consola de H2 está disponible en:
+Ejemplo:
 
-```
-http://localhost:8080/h2-console
-```
+V1__create_users_table.sql
+Flyway se ejecuta automáticamente al iniciar la aplicación y garantiza:
 
----
+Versionado de la base de datos
 
-## 📌 Estado del proyecto
+Consistencia entre entornos
 
-✔ CRUD funcional  
-✔ Arquitectura base definida  
-✔ Uso de DTOs y MapStruct  
+Evolución controlada del esquema
 
-🔄 Pendiente: manejo de errores más avanzado  
-🔄 Pendiente: migración a base de datos real (PostgreSQL)  
-🔄 Pendiente: Spring Security + JWT  
+🔍 Ver las tablas de PostgreSQL
+Podés inspeccionar la base de datos usando:
+
+pgAdmin
+
+DBeaver
+
+IntelliJ Database Tool
+
+Datos de conexión:
+
+Host: localhost
+
+Port: 5432
+
+Database: users_db
+
+User: postgres
+
+Password: postgres
+
+📌 Estado del proyecto
+✔ CRUD completo y funcional
+✔ PostgreSQL con Docker
+✔ Migraciones con Flyway
+✔ Arquitectura clara y desacoplada
+✔ DTOs y mappers con MapStruct
+✔ Manejo de errores básico
+
+🔄 Pendiente:
+
+Tests unitarios y de integración
+
+Paginación y filtros
+
+Spring Security + JWT
+
+📎 Notas
+Este proyecto está pensado como base profesional para entrevistas técnicas y crecimiento futuro, priorizando buenas prácticas desde el inicio.

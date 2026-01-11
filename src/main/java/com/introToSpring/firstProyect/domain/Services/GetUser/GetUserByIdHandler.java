@@ -19,8 +19,9 @@ public class GetUserByIdHandler implements RequestHandler<GetUserByIdRequest, Ge
 
     @Override
     public GetUserByIdResponse handle(GetUserByIdRequest request) {
-        User user = userRepository.findById(request.getId())
-                .orElseThrow(() -> new UserNotFoundException(request.getId()));
+        Long requestId = request.getId();
+        User user = userRepository.findById(requestId)
+                .orElseThrow(() -> new UserNotFoundException(requestId));
 
         return new GetUserByIdResponse(userMapper.toResponse(user));
     }
