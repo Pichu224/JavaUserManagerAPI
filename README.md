@@ -58,6 +58,10 @@ Esta separación permite un código **mantenible, testeable y escalable**.
 
 ```bash
 git clone https://github.com/Pichu224/JavaUserManagerAPI.git
+```
+
+---
+
 cd JavaUserManagerAPI
 
 2️⃣ Levantar la base de datos con Docker
